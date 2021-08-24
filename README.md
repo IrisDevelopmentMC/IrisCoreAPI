@@ -1,4 +1,4 @@
-# IrisAPICore
+# IrisCoreAPI
 
 A core api for all IrisDevelopment plugins.
 
