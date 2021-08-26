@@ -17,7 +17,6 @@ public interface Timer {
 	 */
 	String getDisplayName();
 
-
 	/**
 	 * Grabs the timer's duration (milliseconds)
 	 * @return The timer's duration (milliseconds)
@@ -31,9 +30,19 @@ public interface Timer {
 	long getRemaining();
 
 
-	void setFinishedRunnable();
+	/**
+	 * Called by a provider when the timer is started
+	 */
+	void onStart();
 
-	Runnable getFinishedRunnable();
+	/**
+	 * Called by a provider when the timer is successfully completed
+	 */
+	void onCompletion();
 
+	/**
+	 * Called by a provider when the timer is cancelled
+	 */
+	void onCancelation();
 
 }
