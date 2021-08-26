@@ -8,7 +8,7 @@ import java.util.*;
 public class Generics {
 
 	public static <E> ArrayList<E> castList(Object uncastedList, Class<E> type) {
-		ArrayList<E> list = new ArrayList();
+		ArrayList<E> list = new ArrayList<>();
 
 		if (uncastedList instanceof List) {
 
@@ -23,7 +23,7 @@ public class Generics {
 	}
 
 	public static <E> HashSet<E> castSet(Object uncastedSet, Class<E> type) {
-		HashSet<E> set = new HashSet();
+		HashSet<E> set = new HashSet<>();
 
 		if (uncastedSet instanceof Set) {
 
@@ -38,7 +38,7 @@ public class Generics {
 	}
 
 	public static <K, V> HashMap<K, V> castMap(Object uncastedMap, Class<K> keyType, Class<V> valueType) {
-		HashMap<K, V> map = new HashMap();
+		HashMap<K, V> map = new HashMap<>();
 
 		if (uncastedMap instanceof Map) {
 
