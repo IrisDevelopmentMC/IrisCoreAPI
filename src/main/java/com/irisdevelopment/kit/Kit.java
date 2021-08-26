@@ -43,6 +43,15 @@ public class Kit implements ConfigurationSerializable, ConfigurationDeserializab
 	}
 
 	/**
+	 * Creats an empty Kit, used for deserializing
+	 */
+	public Kit() {
+		this.name = null;
+		this.contents = null;
+		this.armor = null;
+	}
+
+	/**
 	 * Serializes the kit for a config
 	 * @return The serialized kit map
 	 */
