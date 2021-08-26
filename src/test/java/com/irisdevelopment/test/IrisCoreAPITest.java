@@ -2,6 +2,7 @@ package com.irisdevelopment.test;
 
 import com.irisdevelopment.placeholder.PlaceholderAPI;
 import com.irisdevelopment.test.placeholder.TestPlaceholderProvider;
+import com.irisdevelopment.util.Format;
 
 public class IrisCoreAPITest {
 
@@ -9,6 +10,7 @@ public class IrisCoreAPITest {
 		//TODO: Implement testing envirnment for IrisHCF
 
 		System.out.println((testPlaceholderAPI()) ? "PlaceholderAPI passed" : "PlaceholderAPI failed");
+		testTimeFormatting();
 	}
 
 	private static boolean testPlaceholderAPI() {
@@ -32,4 +34,7 @@ public class IrisCoreAPITest {
 		return true;
 	}
 
+	private static void testTimeFormatting() {
+		System.out.println(Format.millisecondTime(15226034L)); // 4:13:46
+	}
 }

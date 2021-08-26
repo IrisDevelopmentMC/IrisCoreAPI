@@ -12,7 +12,7 @@ public class Generics {
 
 		if (uncastedList instanceof List) {
 
-			List<?> castedList = (List)uncastedList;
+			List<?> castedList = (List<?>)uncastedList;
 			for (Object listObject : castedList)
 				if (type.isAssignableFrom(listObject.getClass()))
 					list.add(type.cast(listObject));
@@ -27,7 +27,7 @@ public class Generics {
 
 		if (uncastedSet instanceof Set) {
 
-			Set<?> castedSet = (Set)uncastedSet;
+			Set<?> castedSet = (Set<?>)uncastedSet;
 			for (Object listObject : castedSet)
 				if (type.isAssignableFrom(listObject.getClass()))
 					set.add(type.cast(listObject));
@@ -42,7 +42,7 @@ public class Generics {
 
 		if (uncastedMap instanceof Map) {
 
-			Map<?, ?> castedMap = (Map)uncastedMap;
+			Map<?, ?> castedMap = (Map<?, ?>)uncastedMap;
 			for (Map.Entry<?, ?> entry : castedMap.entrySet())
 				if (keyType.isAssignableFrom(entry.getKey().getClass()) && valueType.isAssignableFrom(entry.getValue().getClass()))
 					map.put(keyType.cast(entry.getKey()), valueType.cast(entry.getValue()));
