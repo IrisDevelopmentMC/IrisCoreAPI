@@ -47,6 +47,7 @@ public class Scoreboard {
 				plugin.getServer().getScheduler().cancelTask(taskID);
 
 			objectiveHandler = null;
+			owningPlayer.setScoreboard(plugin.getServer().getScoreboardManager().getMainScoreboard());
 		}
 	}
 
@@ -55,6 +56,8 @@ public class Scoreboard {
 
 		if (entryProvider != null)
 			setEntryProvider(entryProvider);
+
+		owningPlayer.setScoreboard(bukkitScoreboard);
 	}
 
 	public void reset() {

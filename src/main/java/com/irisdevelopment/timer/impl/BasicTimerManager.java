@@ -30,6 +30,9 @@ public class BasicTimerManager implements TimerProvider {
 	public BasicTimerManager(JavaPlugin plugin, long updateInterval) {
 		this.plugin = plugin;
 		this.updateInterval = updateInterval;
+
+		this.timers = new HashSet<>();
+
 		createTask();
 	}
 
@@ -37,7 +40,7 @@ public class BasicTimerManager implements TimerProvider {
 		taskID = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin,
 			() -> {
 				for (Timer timer : timers)
-					if (timer.getRemaining() == 0L) {
+					if (timer.getRemaining() <= 0L) {
 						TimerFinishEvent event = new TimerFinishEvent(timer);
 						Bukkit.getPluginManager().callEvent(event);
 

@@ -1,12 +1,13 @@
 package com.irisdevelopment.scoreboard;
 
-import javafx.util.Pair;
+import com.irisdevelopment.util.Pair;
 import lombok.Getter;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Team;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ObjectiveHandler {
@@ -14,7 +15,7 @@ public class ObjectiveHandler {
 	private final Scoreboard scoreboard;
 	private final @Getter Objective objective;
 
-	private List<ScoreboardEntry> current = new ArrayList<>();
+	private HashMap<String, ScoreboardEntry> current = new HashMap<>();
 
 
 	public ObjectiveHandler(Scoreboard scoreboard) {
@@ -24,7 +25,7 @@ public class ObjectiveHandler {
 	}
 
 	public void updateContents(List<ScoreboardEntry> entries) {
-		List<ScoreboardEntry> newCurrent = new ArrayList<>();
+		HashMap<String, ScoreboardEntry> newCurrent = new HashMap<>();
 
 		for (Pair<ScoreboardEntry, Integer> filteredEntryPair : filterUpdates(entries)) {
 			ScoreboardEntry entry = filteredEntryPair.getKey();
@@ -40,22 +41,19 @@ public class ObjectiveHandler {
 				team.addEntry(entry.getName());
 
 			objective.getScore(entry.getName()).setScore(filteredEntryPair.getValue());
-			newCurrent.add(entry);
+			newCurrent.put(team.getName(), entry);
 		}
 
-
-		current.removeAll(newCurrent);
-		for (ScoreboardEntry previous : current) {
-			Team team = scoreboard.getBukkitScoreboard().getTeam(previous.getName());
-			if (team != null) {
-				team.removeEntry(previous.getName());
-				scoreboard.getBukkitScoreboard().resetScores(previous.getName());
+		for (Team team : scoreboard.getBukkitScoreboard().getTeams())
+			if (!newCurrent.containsKey(team.getName())) {
+				team.removeEntry(team.getName());
+				scoreboard.getBukkitScoreboard().resetScores(team.getName());
 			}
-		}
 
 		current = newCurrent;
 
-		objective.setDisplayName(scoreboard.getTitle());
+		if (!objective.getDisplayName().equals(scoreboard.getTitle()))
+			objective.setDisplayName(scoreboard.getTitle());
 	}
 
 	private List<Pair<ScoreboardEntry, Integer>> filterUpdates(List<ScoreboardEntry> entries) {
