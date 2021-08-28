@@ -18,23 +18,23 @@ public class Format {
 	public static String millisecondTime(long duration) {
 		// Greater than or equal to an hour
 		if (duration >= 3600000L) { // HH:mm:ss
-			return String.format("%d:%d:%d", TimeUnit.MILLISECONDS.toHours(duration),
-					TimeUnit.MILLISECONDS.toMinutes(duration) % TimeUnit.HOURS.toMinutes(1),
-					TimeUnit.MILLISECONDS.toSeconds(duration) % TimeUnit.MINUTES.toSeconds(1));
+			return (TimeUnit.MILLISECONDS.toHours(duration)) + ":"
+					+ (TimeUnit.MILLISECONDS.toMinutes(duration) % TimeUnit.HOURS.toMinutes(1)) + ":"
+					+ (TimeUnit.MILLISECONDS.toSeconds(duration) % TimeUnit.MINUTES.toSeconds(1));
 		}
 		// Greater than or equal to a minute
 		else if (duration >= 60000L) { // mm:ss
-			return String.format("%d:%d", TimeUnit.MILLISECONDS.toMinutes(duration),
-					TimeUnit.MILLISECONDS.toSeconds(duration) % TimeUnit.MINUTES.toSeconds(1));
+			return (TimeUnit.MILLISECONDS.toMinutes(duration)) + ":"
+					+ (TimeUnit.MILLISECONDS.toSeconds(duration) % TimeUnit.MINUTES.toSeconds(1));
 		}
 		// Greater than or equal to 10 seconds
 		else if (duration >= 10000L) { // ss
-			return String.format("%d", TimeUnit.MILLISECONDS.toSeconds(duration));
+			return (TimeUnit.MILLISECONDS.toSeconds(duration)) + "";
 		}
 		// Less than 10 seconds
-		else { // ss.MM
-			return String.format("%d.%d", TimeUnit.MILLISECONDS.toSeconds(duration),
-					duration % TimeUnit.SECONDS.toMillis(1)).substring(0, 3);
+		else { // s.M
+			return ((TimeUnit.MILLISECONDS.toSeconds(duration)) + "."
+					+ (duration % TimeUnit.SECONDS.toMillis(1))).substring(0, 3);
 		}
 	}
 }
